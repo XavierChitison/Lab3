@@ -8,6 +8,7 @@ Purpose: This program allows the user to select one of four text files.
 Starter Code: No starter code was used.
 Date: September 26, 2026
 """
+
 from pathlib import Path
 import string
 
@@ -21,6 +22,7 @@ class WordAnalyzer:
 
         # Private dictionary for word frequencies
         self.__frequencies = {}
+
     def process_file(self):
         """Read the file and count each word."""
 
@@ -53,6 +55,7 @@ class WordAnalyzer:
                             self.__frequencies[word] = 1
 
             return True
+
         except FileNotFoundError:
             print(f"\nError: '{self.__filepath.name}' was not found.")
             return False
@@ -90,3 +93,44 @@ def main():
         "3": "The Count of Monte Cristo",
         "4": "A Princess of Mars"
     }
+
+    while True:
+        print("\n--- Word Analyzer ---")
+        print("Please select a file to analyze:")
+        print("1. Tarzan")
+        print("2. Treasure Island")
+        print("3. The Count of Monte Cristo")
+        print("4. A Princess of Mars")
+        print("5. Exit")
+
+        choice = input("\nEnter your choice (1-5): ")
+
+        # Exit program
+        if choice == "5":
+            print("\nGoodbye!")
+            break
+
+        # Validate choice
+        if choice not in files:
+            print("\nInvalid choice. Please select from 1-5.")
+            input("\nPress Enter to return to the menu...")
+            continue
+
+        # Get selected file
+        selected_file = files[choice]
+
+        print(f"\nProcessing '{selected_file.name}'...")
+
+        # Create WordAnalyzer object
+        analyzer = WordAnalyzer(selected_file)
+
+        # Process file and print report if successful
+        if analyzer.process_file():
+            analyzer.print_report()
+
+        input("\nPress Enter to return to the menu...")
+
+
+# Run the program
+if __name__ == "__main__":
+    main()
