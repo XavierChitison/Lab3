@@ -54,8 +54,39 @@ class WordAnalyzer:
 
             return True
         except FileNotFoundError:
-            return False
-
-        except FileNotFoundError:
             print(f"\nError: '{self.__filepath.name}' was not found.")
             return False
+
+    def print_report(self):
+        """Print all words and their counts alphabetically."""
+
+        # Get and sort the dictionary keys
+        words = sorted(self.__frequencies.keys())
+
+        print("\n--- Word Count Report ---")
+
+        for word in words:
+            print(f"{word:<20} :: {self.__frequencies[word]}")
+
+
+def main():
+    """Main driver for the Word Analyzer program."""
+
+    # Get the folder where this Python program is located
+    project_folder = Path(__file__).parent
+
+    # Dictionary containing the four text file paths
+    files = {
+        "1": project_folder / "Tarzan.txt",
+        "2": project_folder / "treasure_island.txt",
+        "3": project_folder / "monte_cristo.txt",
+        "4": project_folder / "princess_mars.txt"
+    }
+
+    # Names displayed in the menu
+    display_names = {
+        "1": "Tarzan",
+        "2": "Treasure Island",
+        "3": "The Count of Monte Cristo",
+        "4": "A Princess of Mars"
+    }
