@@ -55,3 +55,7 @@ class WordAnalyzer:
             return True
         except FileNotFoundError:
             return False
+
+        except FileNotFoundError:
+            print(f"\nError: '{self.__filepath.name}' was not found.")
+            return False
